@@ -31,6 +31,17 @@ class EventBus {
         onError: onError,
         onDone: onDone,
       );
+  StreamSubscription<Event> onAll(
+    void Function(Event) callback,
+    List<Type> types,
+  ) =>
+      _eventBus.stream.listen((event) {
+        for (final refetchEventType in types) {
+          if (event.runtimeType == refetchEventType) {
+            callback(event);
+          }
+        }
+      });
 
   void _init() {
     _eventBus.stream.listen((event) {

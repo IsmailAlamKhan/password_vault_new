@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../shared/controllers/current_user.dart';
 import '../../../shared/formz/formz.dart';
 import '../../../shared/widgets/widgets.dart';
+import '../../home/home.dart';
 import '../../signup/view/signup_view.dart';
 import '../login_controller.dart';
 
@@ -13,7 +15,19 @@ class LoginView extends ConsumerWidget {
 
   static const path = '/login';
 
-  static GoRoute get route => GoRoute(path: path, builder: (context, state) => const LoginView());
+  static GoRoute route(Ref ref) {
+    final currentUserState = ref.read(currentUserControllerProvider);
+    return GoRoute(
+      path: path,
+      builder: (context, state) => const LoginView(),
+      redirect: (state) {
+        final isLoggedIn = currentUserState.whenOrNull(authenticated: (_) => true) ?? false;
+        if (isLoggedIn) {
+          return HomeView.path;
+        }
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,26 +40,23 @@ class LoginView extends ConsumerWidget {
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 400),
             child: Card(
-              child: Padding(
+              child: ListView(
                 padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    AppTextFormField<Username>(
-                      label: 'Username',
-                      formzInput: state.username,
-                      onChanged: controller.changeUsername,
-                    ),
-                    const SizedBox(height: 20),
-                    AppTextFormField(
-                      label: 'Password',
-                      type: TextFieldType.password,
-                      formzInput: state.password,
-                      onChanged: controller.changePassword,
-                    ),
-                    const SizedBox(height: 20),
-                    // TextButton(onPressed: onPressed, child: ),
-                    Text.rich(
+                shrinkWrap: true,
+                children: [
+                  AppTextFormField<Email>(
+                    formzInput: state.email,
+                    onChanged: controller.changeEmail,
+                  ),
+                  const SizedBox(height: 20),
+                  AppTextFormField(
+                    type: TextFieldType.password,
+                    formzInput: state.password,
+                    onChanged: controller.changePassword,
+                  ),
+                  const SizedBox(height: 20),
+                  Center(
+                    child: Text.rich(
                       TextSpan(
                         text: "Don't have an account?",
                         children: [
@@ -60,14 +71,20 @@ class LoginView extends ConsumerWidget {
                         ],
                       ),
                     ),
-
-                    const SizedBox(height: 20),
-                    FilledTonalButton(
-                      onPressed: () {},
-                      child: const Text('Login'),
+                  ),
+                  const SizedBox(height: 20),
+                  Center(
+                    child: FilledTonalButton(
+                      onPressed: state.isSubmitting ? null : controller.submit,
+                      child: state.isSubmitting
+                          ? const SizedBox.square(
+                              dimension: 20,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            )
+                          : const Text('Login'),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

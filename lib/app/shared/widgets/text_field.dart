@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:password_vault/app/shared/extensions.dart';
 
+import '../extensions.dart';
 import '../formz/base_codegen.dart';
 
 enum TextFieldType { text, email, password }
@@ -27,12 +27,9 @@ class AppTextFormField<T extends DefaultStringInput> extends HookWidget {
   Widget build(BuildContext context) {
     final obsecure = useState(true);
     final isPassword = type == TextFieldType.password;
-    InputDecoration decoration = const InputDecoration();
-    if (this.decoration != null) {
-      decoration = this.decoration!;
-    } else if (label != null) {
-      decoration = InputDecoration(labelText: label);
-    }
+    InputDecoration decoration = this.decoration ?? const InputDecoration();
+    bool isRequired = formzInput.isRequired;
+
     final tec = useTextEditingController(text: formzInput.value);
 
     useEffect(() {
@@ -48,6 +45,20 @@ class AppTextFormField<T extends DefaultStringInput> extends HookWidget {
         obsecure.value,
         (value) => obsecure.value = value,
         errorText: formzInput.error?.message,
+        label: Text.rich(
+          TextSpan(
+            text: label ?? formzInput.label,
+            children: [
+              if (isRequired)
+                TextSpan(
+                  text: ' *',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                ),
+            ],
+          ),
+        ),
       ).merge(decoration),
     );
   }
@@ -62,6 +73,7 @@ class _InputDecoration extends InputDecoration {
     this.isObsecure,
     this.onToggleObsecure, {
     super.errorText,
+    super.label,
   });
 
   @override

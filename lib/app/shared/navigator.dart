@@ -6,8 +6,8 @@ import 'events/navigation_codegen.dart';
 mixin NavigatorController {
   EventBus get eventBus;
 
-  void push(String route, [bool replaceAll = false]) {
-    eventBus.emit(NavigationEvent.page(route, replaceAll));
+  void push(String route, {Object? extra}) {
+    eventBus.emit(NavigationEvent.page(route, extra: extra));
   }
 
   void pop() => eventBus.emit(const NavigationEvent.pop());

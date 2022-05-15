@@ -3,6 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart' hide Provider;
 
 import '../db/models_codegen.dart';
 import '../db/service.dart';
+import '../exceptions.dart';
 import '../models/rpc/rpc.dart';
 import '../models/user_codegen.dart';
 
@@ -37,7 +38,7 @@ class SupabaseAuthServiceImpl extends AuthService {
   Future<AppUser> login({required String email, required String password}) async {
     GotrueSessionResponse res = await _supabase.auth.signIn(email: email, password: password);
     if (res.error != null) {
-      throw Exception(res.error!.message);
+      throw AppException(res.error!.message);
     }
 
     final user = res.data?.user;
@@ -55,7 +56,7 @@ class SupabaseAuthServiceImpl extends AuthService {
       },
     );
     if (profileResponse.error != null) {
-      throw Exception(profileResponse.error!.message);
+      throw AppException(profileResponse.error!.message);
     }
 
     final json = {...res.data!.user!.toJson(), ...profileResponse.data!};
@@ -67,7 +68,7 @@ class SupabaseAuthServiceImpl extends AuthService {
   Future<void> logout() async {
     final res = await _supabase.auth.signOut();
     if (res.error != null) {
-      throw Exception(res.error!.message);
+      throw AppException(res.error!.message);
     }
   }
 
@@ -89,18 +90,25 @@ class SupabaseAuthServiceImpl extends AuthService {
       return null;
     } else {
       final userId = response.data!.user!.id;
-      final profileResponse = await dbService.rpc<Map<String, dynamic>>(
+      final profileResponse = await dbService.rpc<Map<String, dynamic>?>(
         GetProfilesRpcBuilder(uid: userId),
         mapData: (data) {
           if (data is List<dynamic>) {
-            return data[0];
+            if (data.isNotEmpty) {
+              return data[0];
+            }
+          } else {
+            return data;
           }
-          return data;
         },
       );
       if (profileResponse.error != null) {
-        throw Exception(profileResponse.error!.message);
+        throw AppException(profileResponse.error!.message);
       }
+      if (profileResponse.data == null) {
+        throw AppException('Profile is null');
+      }
+
       final json = {
         ...response.data!.user!.toJson(),
         ...profileResponse.data!,
@@ -121,7 +129,7 @@ class SupabaseAuthServiceImpl extends AuthService {
   }) async {
     final res = await _supabase.auth.signUp(email, password);
     if (res.error != null) {
-      throw Exception(res.error!.message);
+      throw AppException(res.error!.message);
     }
 
     final user = res.data!.user;
@@ -135,7 +143,7 @@ class SupabaseAuthServiceImpl extends AuthService {
     );
 
     if (profileResponse.error != null) {
-      throw Exception(profileResponse.error!.message);
+      throw AppException(profileResponse.error!.message);
     }
 
     final json = {...res.data!.user!.toJson(), ...profileResponse.data!};

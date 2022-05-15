@@ -27,7 +27,7 @@ class ErrorResponse with _$ErrorResponse {
 }
 
 extension PostgrestResponseX on PostgrestResponse {
-  Response<T> toResponse<T>([T Function(dynamic data)? mapData]) {
+  Response<T> toResponse<T>([T Function(List data)? mapData]) {
     return Response<T>(
       count: count,
       data: data == null

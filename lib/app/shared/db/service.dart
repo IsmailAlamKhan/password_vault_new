@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' hide Provider;
 
+import '../exceptions.dart';
 import '../models/rpc/rpc.dart';
 import 'config.dart';
 import 'models_codegen.dart';
@@ -46,7 +46,7 @@ class SupabaseDbServiceImpl extends DbService {
   }) =>
       _supabase.rpc(rpcBuilder.name, params: rpcBuilder.toJson()).execute().then((value) {
         if (value.error != null) {
-          throw Exception(value.error!.message);
+          throw AppException(value.error!.message);
         }
         return value.toResponse<T>(mapData);
       });

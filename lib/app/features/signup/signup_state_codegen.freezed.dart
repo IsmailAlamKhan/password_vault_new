@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'login_state_codegen.dart';
+part of 'signup_state_codegen.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,35 +15,38 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$LoginState {
+mixin _$SignupState {
   Email get email => throw _privateConstructorUsedError;
+  Username get username => throw _privateConstructorUsedError;
   Password get password => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $LoginStateCopyWith<LoginState> get copyWith =>
+  $SignupStateCopyWith<SignupState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LoginStateCopyWith<$Res> {
-  factory $LoginStateCopyWith(
-          LoginState value, $Res Function(LoginState) then) =
-      _$LoginStateCopyWithImpl<$Res>;
-  $Res call({Email email, Password password, bool isSubmitting});
+abstract class $SignupStateCopyWith<$Res> {
+  factory $SignupStateCopyWith(
+          SignupState value, $Res Function(SignupState) then) =
+      _$SignupStateCopyWithImpl<$Res>;
+  $Res call(
+      {Email email, Username username, Password password, bool isSubmitting});
 }
 
 /// @nodoc
-class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
-  _$LoginStateCopyWithImpl(this._value, this._then);
+class _$SignupStateCopyWithImpl<$Res> implements $SignupStateCopyWith<$Res> {
+  _$SignupStateCopyWithImpl(this._value, this._then);
 
-  final LoginState _value;
+  final SignupState _value;
   // ignore: unused_field
-  final $Res Function(LoginState) _then;
+  final $Res Function(SignupState) _then;
 
   @override
   $Res call({
     Object? email = freezed,
+    Object? username = freezed,
     Object? password = freezed,
     Object? isSubmitting = freezed,
   }) {
@@ -52,6 +55,10 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as Email,
+      username: username == freezed
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as Username,
       password: password == freezed
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -65,36 +72,42 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$$_LoginStateCopyWith<$Res>
-    implements $LoginStateCopyWith<$Res> {
-  factory _$$_LoginStateCopyWith(
-          _$_LoginState value, $Res Function(_$_LoginState) then) =
-      __$$_LoginStateCopyWithImpl<$Res>;
+abstract class _$$_SignupStateCopyWith<$Res>
+    implements $SignupStateCopyWith<$Res> {
+  factory _$$_SignupStateCopyWith(
+          _$_SignupState value, $Res Function(_$_SignupState) then) =
+      __$$_SignupStateCopyWithImpl<$Res>;
   @override
-  $Res call({Email email, Password password, bool isSubmitting});
+  $Res call(
+      {Email email, Username username, Password password, bool isSubmitting});
 }
 
 /// @nodoc
-class __$$_LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
-    implements _$$_LoginStateCopyWith<$Res> {
-  __$$_LoginStateCopyWithImpl(
-      _$_LoginState _value, $Res Function(_$_LoginState) _then)
-      : super(_value, (v) => _then(v as _$_LoginState));
+class __$$_SignupStateCopyWithImpl<$Res> extends _$SignupStateCopyWithImpl<$Res>
+    implements _$$_SignupStateCopyWith<$Res> {
+  __$$_SignupStateCopyWithImpl(
+      _$_SignupState _value, $Res Function(_$_SignupState) _then)
+      : super(_value, (v) => _then(v as _$_SignupState));
 
   @override
-  _$_LoginState get _value => super._value as _$_LoginState;
+  _$_SignupState get _value => super._value as _$_SignupState;
 
   @override
   $Res call({
     Object? email = freezed,
+    Object? username = freezed,
     Object? password = freezed,
     Object? isSubmitting = freezed,
   }) {
-    return _then(_$_LoginState(
+    return _then(_$_SignupState(
       email: email == freezed
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as Email,
+      username: username == freezed
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as Username,
       password: password == freezed
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
@@ -109,9 +122,10 @@ class __$$_LoginStateCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoginState extends _LoginState {
-  const _$_LoginState(
+class _$_SignupState extends _SignupState {
+  const _$_SignupState(
       {this.email = const Email.pure(),
+      this.username = const Username.pure(),
       this.password = const Password.pure(),
       this.isSubmitting = false})
       : super._();
@@ -121,6 +135,9 @@ class _$_LoginState extends _LoginState {
   final Email email;
   @override
   @JsonKey()
+  final Username username;
+  @override
+  @JsonKey()
   final Password password;
   @override
   @JsonKey()
@@ -128,15 +145,16 @@ class _$_LoginState extends _LoginState {
 
   @override
   String toString() {
-    return 'LoginState(email: $email, password: $password, isSubmitting: $isSubmitting)';
+    return 'SignupState(email: $email, username: $username, password: $password, isSubmitting: $isSubmitting)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoginState &&
+            other is _$_SignupState &&
             const DeepCollectionEquality().equals(other.email, email) &&
+            const DeepCollectionEquality().equals(other.username, username) &&
             const DeepCollectionEquality().equals(other.password, password) &&
             const DeepCollectionEquality()
                 .equals(other.isSubmitting, isSubmitting));
@@ -146,30 +164,34 @@ class _$_LoginState extends _LoginState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(email),
+      const DeepCollectionEquality().hash(username),
       const DeepCollectionEquality().hash(password),
       const DeepCollectionEquality().hash(isSubmitting));
 
   @JsonKey(ignore: true)
   @override
-  _$$_LoginStateCopyWith<_$_LoginState> get copyWith =>
-      __$$_LoginStateCopyWithImpl<_$_LoginState>(this, _$identity);
+  _$$_SignupStateCopyWith<_$_SignupState> get copyWith =>
+      __$$_SignupStateCopyWithImpl<_$_SignupState>(this, _$identity);
 }
 
-abstract class _LoginState extends LoginState {
-  const factory _LoginState(
+abstract class _SignupState extends SignupState {
+  const factory _SignupState(
       {final Email email,
+      final Username username,
       final Password password,
-      final bool isSubmitting}) = _$_LoginState;
-  const _LoginState._() : super._();
+      final bool isSubmitting}) = _$_SignupState;
+  const _SignupState._() : super._();
 
   @override
   Email get email => throw _privateConstructorUsedError;
+  @override
+  Username get username => throw _privateConstructorUsedError;
   @override
   Password get password => throw _privateConstructorUsedError;
   @override
   bool get isSubmitting => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$_LoginStateCopyWith<_$_LoginState> get copyWith =>
+  _$$_SignupStateCopyWith<_$_SignupState> get copyWith =>
       throw _privateConstructorUsedError;
 }

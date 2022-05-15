@@ -11,8 +11,8 @@ abstract class DbConfig {
 class SupabaseConfig extends DbConfig {
   const SupabaseConfig()
       : super(
-          url: 'https://eelhuqvhkfrcingmuijj.supabase.co',
+          url: 'https://yjunuswfsyezbgjvizgb.supabase.co',
           anonKey:
-              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVlbGh1cXZoa2ZyY2luZ211aWpqIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTI2MDM1OTMsImV4cCI6MTk2ODE3OTU5M30.CczD42Ru6Mry4lHI9KJpm_wdaYHv913djEkgQz-B1N4',
+              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlqdW51c3dmc3llemJnanZpemdiIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTI2NTUxNDUsImV4cCI6MTk2ODIzMTE0NX0.TyREghdy0xzm1OrTe3std9WyxPJuEFimBQBNEf1l4iU',
         );
 }

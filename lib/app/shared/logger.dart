@@ -50,18 +50,18 @@ class AppLogger {
 
       final output =
           "[$name] $recordMessege${error != null ? '\n$error' : ''}${stack != null ? '\n$stack' : ''}";
-      var _messege = "";
+      var messege = "";
       if (isError) {
-        _messege = '🛑 \x1B[31m$output\x1B[0m ';
+        messege = '🛑 \x1B[31m$output\x1B[0m ';
       }
       if (isWarning) {
-        _messege = '⚠️ \x1B[33m$output\x1B[0m ⚠️';
+        messege = '⚠️ \x1B[33m$output\x1B[0m ⚠️';
       }
       if (isNormal) {
-        _messege = '\x1B[34m ℹ️ $output ℹ️ \x1B[0m';
+        messege = '\x1B[34m ℹ️ $output ℹ️ \x1B[0m';
       }
 
-      debugPrint(_messege);
+      debugPrint(messege);
     }
   }
 }

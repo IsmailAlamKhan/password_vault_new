@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$NavigationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String route, bool replaceAll) page,
+    required TResult Function(String route, Object? extra) page,
     required TResult Function() pop,
     required TResult Function(WidgetBuilder builder) dialog,
     required TResult Function(SnackBar snackBar) snackbar,
@@ -26,7 +26,7 @@ mixin _$NavigationEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String route, bool replaceAll)? page,
+    TResult Function(String route, Object? extra)? page,
     TResult Function()? pop,
     TResult Function(WidgetBuilder builder)? dialog,
     TResult Function(SnackBar snackBar)? snackbar,
@@ -34,7 +34,7 @@ mixin _$NavigationEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String route, bool replaceAll)? page,
+    TResult Function(String route, Object? extra)? page,
     TResult Function()? pop,
     TResult Function(WidgetBuilder builder)? dialog,
     TResult Function(SnackBar snackBar)? snackbar,
@@ -90,7 +90,7 @@ abstract class _$$NavigationEventPageCopyWith<$Res> {
   factory _$$NavigationEventPageCopyWith(_$NavigationEventPage value,
           $Res Function(_$NavigationEventPage) then) =
       __$$NavigationEventPageCopyWithImpl<$Res>;
-  $Res call({String route, bool replaceAll});
+  $Res call({String route, Object? extra});
 }
 
 /// @nodoc
@@ -107,17 +107,14 @@ class __$$NavigationEventPageCopyWithImpl<$Res>
   @override
   $Res call({
     Object? route = freezed,
-    Object? replaceAll = freezed,
+    Object? extra = freezed,
   }) {
     return _then(_$NavigationEventPage(
       route == freezed
           ? _value.route
           : route // ignore: cast_nullable_to_non_nullable
               as String,
-      replaceAll == freezed
-          ? _value.replaceAll
-          : replaceAll // ignore: cast_nullable_to_non_nullable
-              as bool,
+      extra: extra == freezed ? _value.extra : extra,
     ));
   }
 }
@@ -125,16 +122,16 @@ class __$$NavigationEventPageCopyWithImpl<$Res>
 /// @nodoc
 
 class _$NavigationEventPage implements NavigationEventPage {
-  const _$NavigationEventPage(this.route, this.replaceAll);
+  const _$NavigationEventPage(this.route, {this.extra});
 
   @override
   final String route;
   @override
-  final bool replaceAll;
+  final Object? extra;
 
   @override
   String toString() {
-    return 'NavigationEvent.page(route: $route, replaceAll: $replaceAll)';
+    return 'NavigationEvent.page(route: $route, extra: $extra)';
   }
 
   @override
@@ -143,15 +140,14 @@ class _$NavigationEventPage implements NavigationEventPage {
         (other.runtimeType == runtimeType &&
             other is _$NavigationEventPage &&
             const DeepCollectionEquality().equals(other.route, route) &&
-            const DeepCollectionEquality()
-                .equals(other.replaceAll, replaceAll));
+            const DeepCollectionEquality().equals(other.extra, extra));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(route),
-      const DeepCollectionEquality().hash(replaceAll));
+      const DeepCollectionEquality().hash(extra));
 
   @JsonKey(ignore: true)
   @override
@@ -162,36 +158,36 @@ class _$NavigationEventPage implements NavigationEventPage {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String route, bool replaceAll) page,
+    required TResult Function(String route, Object? extra) page,
     required TResult Function() pop,
     required TResult Function(WidgetBuilder builder) dialog,
     required TResult Function(SnackBar snackBar) snackbar,
   }) {
-    return page(route, replaceAll);
+    return page(route, extra);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String route, bool replaceAll)? page,
+    TResult Function(String route, Object? extra)? page,
     TResult Function()? pop,
     TResult Function(WidgetBuilder builder)? dialog,
     TResult Function(SnackBar snackBar)? snackbar,
   }) {
-    return page?.call(route, replaceAll);
+    return page?.call(route, extra);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String route, bool replaceAll)? page,
+    TResult Function(String route, Object? extra)? page,
     TResult Function()? pop,
     TResult Function(WidgetBuilder builder)? dialog,
     TResult Function(SnackBar snackBar)? snackbar,
     required TResult orElse(),
   }) {
     if (page != null) {
-      return page(route, replaceAll);
+      return page(route, extra);
     }
     return orElse();
   }
@@ -235,11 +231,11 @@ class _$NavigationEventPage implements NavigationEventPage {
 }
 
 abstract class NavigationEventPage implements NavigationEvent {
-  const factory NavigationEventPage(final String route, final bool replaceAll) =
+  const factory NavigationEventPage(final String route, {final Object? extra}) =
       _$NavigationEventPage;
 
   String get route => throw _privateConstructorUsedError;
-  bool get replaceAll => throw _privateConstructorUsedError;
+  Object? get extra => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$NavigationEventPageCopyWith<_$NavigationEventPage> get copyWith =>
       throw _privateConstructorUsedError;
@@ -286,7 +282,7 @@ class _$NavigationEventPop implements NavigationEventPop {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String route, bool replaceAll) page,
+    required TResult Function(String route, Object? extra) page,
     required TResult Function() pop,
     required TResult Function(WidgetBuilder builder) dialog,
     required TResult Function(SnackBar snackBar) snackbar,
@@ -297,7 +293,7 @@ class _$NavigationEventPop implements NavigationEventPop {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String route, bool replaceAll)? page,
+    TResult Function(String route, Object? extra)? page,
     TResult Function()? pop,
     TResult Function(WidgetBuilder builder)? dialog,
     TResult Function(SnackBar snackBar)? snackbar,
@@ -308,7 +304,7 @@ class _$NavigationEventPop implements NavigationEventPop {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String route, bool replaceAll)? page,
+    TResult Function(String route, Object? extra)? page,
     TResult Function()? pop,
     TResult Function(WidgetBuilder builder)? dialog,
     TResult Function(SnackBar snackBar)? snackbar,
@@ -427,7 +423,7 @@ class _$NavigationEventDialog implements NavigationEventDialog {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String route, bool replaceAll) page,
+    required TResult Function(String route, Object? extra) page,
     required TResult Function() pop,
     required TResult Function(WidgetBuilder builder) dialog,
     required TResult Function(SnackBar snackBar) snackbar,
@@ -438,7 +434,7 @@ class _$NavigationEventDialog implements NavigationEventDialog {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String route, bool replaceAll)? page,
+    TResult Function(String route, Object? extra)? page,
     TResult Function()? pop,
     TResult Function(WidgetBuilder builder)? dialog,
     TResult Function(SnackBar snackBar)? snackbar,
@@ -449,7 +445,7 @@ class _$NavigationEventDialog implements NavigationEventDialog {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String route, bool replaceAll)? page,
+    TResult Function(String route, Object? extra)? page,
     TResult Function()? pop,
     TResult Function(WidgetBuilder builder)? dialog,
     TResult Function(SnackBar snackBar)? snackbar,
@@ -576,7 +572,7 @@ class _$NavigationEventSnackbar implements NavigationEventSnackbar {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String route, bool replaceAll) page,
+    required TResult Function(String route, Object? extra) page,
     required TResult Function() pop,
     required TResult Function(WidgetBuilder builder) dialog,
     required TResult Function(SnackBar snackBar) snackbar,
@@ -587,7 +583,7 @@ class _$NavigationEventSnackbar implements NavigationEventSnackbar {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String route, bool replaceAll)? page,
+    TResult Function(String route, Object? extra)? page,
     TResult Function()? pop,
     TResult Function(WidgetBuilder builder)? dialog,
     TResult Function(SnackBar snackBar)? snackbar,
@@ -598,7 +594,7 @@ class _$NavigationEventSnackbar implements NavigationEventSnackbar {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String route, bool replaceAll)? page,
+    TResult Function(String route, Object? extra)? page,
     TResult Function()? pop,
     TResult Function(WidgetBuilder builder)? dialog,
     TResult Function(SnackBar snackBar)? snackbar,
