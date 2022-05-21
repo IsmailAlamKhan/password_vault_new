@@ -48,12 +48,7 @@ class SupabaseAuthServiceImpl extends AuthService {
 
     profileResponse = await dbService.rpc<Map<String, dynamic>>(
       GetProfilesRpcBuilder(uid: userId),
-      mapData: (data) {
-        if (data is List<dynamic>) {
-          return data[0];
-        }
-        return data;
-      },
+      mapData: (data) => data[0],
     );
     if (profileResponse.error != null) {
       throw AppException(profileResponse.error!.message);
@@ -93,12 +88,8 @@ class SupabaseAuthServiceImpl extends AuthService {
       final profileResponse = await dbService.rpc<Map<String, dynamic>?>(
         GetProfilesRpcBuilder(uid: userId),
         mapData: (data) {
-          if (data is List<dynamic>) {
-            if (data.isNotEmpty) {
-              return data[0];
-            }
-          } else {
-            return data;
+          if (data.isNotEmpty) {
+            return data[0];
           }
         },
       );

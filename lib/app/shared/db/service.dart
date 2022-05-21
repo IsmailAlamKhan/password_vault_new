@@ -22,7 +22,7 @@ abstract class DbService {
   /// call a stored procedure
   Future<Response<T>> rpc<T>(
     SupabaseRpcBuilder rpcBuilder, {
-    T Function(dynamic data)? mapData,
+    T Function(List<dynamic> data)? mapData,
   });
 }
 
@@ -42,7 +42,7 @@ class SupabaseDbServiceImpl extends DbService {
   @override
   Future<Response<T>> rpc<T>(
     SupabaseRpcBuilder rpcBuilder, {
-    T Function(dynamic data)? mapData,
+    T Function(List<dynamic> data)? mapData,
   }) =>
       _supabase.rpc(rpcBuilder.name, params: rpcBuilder.toJson()).execute().then((value) {
         if (value.error != null) {

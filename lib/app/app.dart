@@ -2,9 +2,9 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:password_vault/app/shared/events/navigation_codegen.dart';
 
 import 'shared/event_bus.dart';
+import 'shared/events/navigation_codegen.dart';
 import 'shared/router/router.dart';
 import 'shared/theme/theme.dart';
 

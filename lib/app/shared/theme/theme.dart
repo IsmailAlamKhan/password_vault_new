@@ -16,9 +16,8 @@ class NoAnimationPageTransitionsBuilder extends PageTransitionsBuilder {
     Animation<double> animation,
     Animation<double> secondaryAnimation,
     Widget child,
-  ) {
-    return child;
-  }
+  ) =>
+      child;
 }
 
 class ThemeSettingChange extends Notification {

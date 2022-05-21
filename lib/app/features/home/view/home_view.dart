@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../shared/breakpoints.dart';
 import '../../../shared/controllers/current_user.dart';
 import '../../../shared/event_bus.dart';
 import '../../../shared/events/events.dart';
 import '../../login/view/login_view.dart';
+import 'passwords.dart';
 
 class HomeView extends ConsumerWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -38,6 +40,22 @@ class HomeView extends ConsumerWidget {
           ),
         ],
       ),
+      body: LayoutBuilder(builder: (context, constraints) {
+        final isSmallScreen = Breakpoints.isSmallScreen(constraints);
+        if (isSmallScreen) {
+          return const PasswordList();
+        } else {
+          return Row(
+            children: [
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 300),
+                child: const PasswordList(),
+              ),
+              const Expanded(child: Placeholder()),
+            ],
+          );
+        }
+      }),
     );
   }
 }

@@ -49,6 +49,7 @@ dependencies:
   supabase: ^0.3.4
   supabase_flutter: ^0.3.1
   validators: ^3.0.0
+  logging: ^1.0.2
 
 dev_dependencies:
   flutter_test:

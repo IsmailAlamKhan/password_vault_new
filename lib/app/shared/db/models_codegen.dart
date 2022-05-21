@@ -28,12 +28,16 @@ class ErrorResponse with _$ErrorResponse {
 
 extension PostgrestResponseX on PostgrestResponse {
   Response<T> toResponse<T>([T Function(List data)? mapData]) {
+    var _mapData = mapData;
+    if (mapData == null && T == List<Map<String, dynamic>>) {
+      _mapData = (data) => data.cast<Map<String, dynamic>>() as T;
+    }
     return Response<T>(
       count: count,
       data: data == null
           ? null
-          : mapData != null
-              ? mapData(data)
+          : _mapData != null
+              ? _mapData(data)
               : data,
       status: status,
       error: error != null ? ErrorResponse.fromJson(error!.toJson()) : null,
