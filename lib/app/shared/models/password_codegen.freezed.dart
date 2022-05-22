@@ -26,6 +26,8 @@ mixin _$PasswordData {
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
   PasswordProvider get provider => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_id')
+  String get userId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +45,8 @@ abstract class $PasswordDataCopyWith<$Res> {
       String password,
       String? username,
       @JsonKey(name: 'created_at') DateTime createdAt,
-      PasswordProvider provider});
+      PasswordProvider provider,
+      @JsonKey(name: 'user_id') String userId});
 
   $PasswordProviderCopyWith<$Res> get provider;
 }
@@ -63,6 +66,7 @@ class _$PasswordDataCopyWithImpl<$Res> implements $PasswordDataCopyWith<$Res> {
     Object? username = freezed,
     Object? createdAt = freezed,
     Object? provider = freezed,
+    Object? userId = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -85,6 +89,10 @@ class _$PasswordDataCopyWithImpl<$Res> implements $PasswordDataCopyWith<$Res> {
           ? _value.provider
           : provider // ignore: cast_nullable_to_non_nullable
               as PasswordProvider,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -108,7 +116,8 @@ abstract class _$$_PasswordDataCopyWith<$Res>
       String password,
       String? username,
       @JsonKey(name: 'created_at') DateTime createdAt,
-      PasswordProvider provider});
+      PasswordProvider provider,
+      @JsonKey(name: 'user_id') String userId});
 
   @override
   $PasswordProviderCopyWith<$Res> get provider;
@@ -132,6 +141,7 @@ class __$$_PasswordDataCopyWithImpl<$Res>
     Object? username = freezed,
     Object? createdAt = freezed,
     Object? provider = freezed,
+    Object? userId = freezed,
   }) {
     return _then(_$_PasswordData(
       id: id == freezed
@@ -154,19 +164,25 @@ class __$$_PasswordDataCopyWithImpl<$Res>
           ? _value.provider
           : provider // ignore: cast_nullable_to_non_nullable
               as PasswordProvider,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_PasswordData implements _PasswordData {
+class _$_PasswordData extends _PasswordData {
   const _$_PasswordData(
       {required this.id,
       required this.password,
       this.username,
       @JsonKey(name: 'created_at') required this.createdAt,
-      required this.provider});
+      required this.provider,
+      @JsonKey(name: 'user_id') required this.userId})
+      : super._();
 
   factory _$_PasswordData.fromJson(Map<String, dynamic> json) =>
       _$$_PasswordDataFromJson(json);
@@ -182,10 +198,13 @@ class _$_PasswordData implements _PasswordData {
   final DateTime createdAt;
   @override
   final PasswordProvider provider;
+  @override
+  @JsonKey(name: 'user_id')
+  final String userId;
 
   @override
   String toString() {
-    return 'PasswordData(id: $id, password: $password, username: $username, createdAt: $createdAt, provider: $provider)';
+    return 'PasswordData(id: $id, password: $password, username: $username, createdAt: $createdAt, provider: $provider, userId: $userId)';
   }
 
   @override
@@ -197,7 +216,8 @@ class _$_PasswordData implements _PasswordData {
             const DeepCollectionEquality().equals(other.password, password) &&
             const DeepCollectionEquality().equals(other.username, username) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.provider, provider));
+            const DeepCollectionEquality().equals(other.provider, provider) &&
+            const DeepCollectionEquality().equals(other.userId, userId));
   }
 
   @JsonKey(ignore: true)
@@ -208,7 +228,8 @@ class _$_PasswordData implements _PasswordData {
       const DeepCollectionEquality().hash(password),
       const DeepCollectionEquality().hash(username),
       const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(provider));
+      const DeepCollectionEquality().hash(provider),
+      const DeepCollectionEquality().hash(userId));
 
   @JsonKey(ignore: true)
   @override
@@ -221,13 +242,16 @@ class _$_PasswordData implements _PasswordData {
   }
 }
 
-abstract class _PasswordData implements PasswordData {
+abstract class _PasswordData extends PasswordData {
   const factory _PasswordData(
-      {required final int id,
-      required final String password,
-      final String? username,
-      @JsonKey(name: 'created_at') required final DateTime createdAt,
-      required final PasswordProvider provider}) = _$_PasswordData;
+          {required final int id,
+          required final String password,
+          final String? username,
+          @JsonKey(name: 'created_at') required final DateTime createdAt,
+          required final PasswordProvider provider,
+          @JsonKey(name: 'user_id') required final String userId}) =
+      _$_PasswordData;
+  const _PasswordData._() : super._();
 
   factory _PasswordData.fromJson(Map<String, dynamic> json) =
       _$_PasswordData.fromJson;
@@ -243,6 +267,9 @@ abstract class _PasswordData implements PasswordData {
   DateTime get createdAt => throw _privateConstructorUsedError;
   @override
   PasswordProvider get provider => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: 'user_id')
+  String get userId => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_PasswordDataCopyWith<_$_PasswordData> get copyWith =>

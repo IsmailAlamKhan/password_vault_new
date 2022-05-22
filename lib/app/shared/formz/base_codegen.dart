@@ -51,19 +51,19 @@ abstract class DefaultInput<T extends Object?> extends FormzInput<T, InputError>
 
   DefaultInput({required this.isRequired, required T value}) : super.dirty(value);
 
-  const DefaultInput.dirty(T value)
+  const DefaultInput.dirty(super.value)
       : isRequired = true,
-        super.dirty(value);
-  const DefaultInput.pure(T value)
+        super.dirty();
+  const DefaultInput.pure(super.value)
       : isRequired = true,
-        super.pure(value);
+        super.pure();
 
-  const DefaultInput.dirtyNonRequired(T value)
+  const DefaultInput.dirtyNonRequired(super.value)
       : isRequired = false,
-        super.dirty(value);
-  const DefaultInput.pureNonRequired(T value)
+        super.dirty();
+  const DefaultInput.pureNonRequired(super.value)
       : isRequired = false,
-        super.pure(value);
+        super.pure();
 
   DefaultInput copyWith([T? value]);
 
@@ -97,13 +97,13 @@ abstract class DefaultInput<T extends Object?> extends FormzInput<T, InputError>
 
 abstract class DefaultStringInput extends DefaultInput<String> {
   DefaultStringInput({
-    required bool isRequired,
-    required String value,
-  }) : super(isRequired: isRequired, value: value);
-  const DefaultStringInput.dirty([String value = '']) : super.dirty(value);
-  const DefaultStringInput.pure([String value = '']) : super.pure(value);
+    required super.isRequired,
+    required super.value,
+  });
+  const DefaultStringInput.dirty([super.value = '']) : super.dirty();
+  const DefaultStringInput.pure([super.value = '']) : super.pure();
 
-  const DefaultStringInput.dirtyNonRequired([String value = '']) : super.dirtyNonRequired(value);
+  const DefaultStringInput.dirtyNonRequired([super.value = '']) : super.dirtyNonRequired();
   const DefaultStringInput.pureNonRequired([String value = '']) : super.pureNonRequired('');
 
   @override

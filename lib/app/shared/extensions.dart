@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 extension InputDecorationX on InputDecoration {
@@ -69,4 +70,38 @@ extension StringX on String {
 extension ExtendedNum on num {
   bool between(num begin, num end) => this >= begin && this < end;
   bool betweenOrEqual(num begin, num end) => this >= begin && this <= end;
+}
+
+extension ColorX on Color {
+  Future<double> _computeLuminance() {
+    return compute<String, double>((_) => computeLuminance(), '');
+  }
+
+  Future<Brightness> brightnessBasedOnBackground() async {
+    if ((await _computeLuminance()) > 0.5) {
+      return Brightness.light;
+    } else {
+      return Brightness.dark;
+    }
+  }
+
+  Future<Color?> contrastColor({
+    Color? Function(Brightness brightness)? colorBuilder,
+  }) async =>
+      (await brightnessBasedOnBackground()).contrastColor(colorBuilder: colorBuilder);
+}
+
+extension BrightnessX on Brightness {
+  Color? contrastColor({
+    Color? Function(Brightness brightness)? colorBuilder,
+  }) {
+    if (colorBuilder != null) {
+      return colorBuilder(this);
+    }
+    if (this == Brightness.light) {
+      return Colors.black87;
+    } else {
+      return Colors.white70;
+    }
+  }
 }

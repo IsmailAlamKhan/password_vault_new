@@ -7,6 +7,7 @@ import '../../shared/formz/formz.dart';
 import '../../shared/logger.dart';
 import '../../shared/navigator.dart';
 import '../../shared/services/auth.dart';
+import '../home/view/home_view.dart';
 import 'login_state_codegen.dart';
 
 final loginControllerProvider =
@@ -38,6 +39,7 @@ class LoginController extends StateNotifier<LoginState> with NavigatorController
           password: state.password.value,
         );
         eventBus.emit(LoggedInEvent(user));
+        go(HomeView.path);
       } on AppException catch (e, s) {
         logError("Login error", error: e, stackTrace: s);
         showSnackbar(e.toString());

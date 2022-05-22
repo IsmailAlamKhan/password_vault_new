@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../features/login/login.dart';
 import '../event_bus.dart';
 import '../events/events.dart';
 import '../exceptions.dart';
@@ -50,6 +51,7 @@ class CurrentUserController extends StateNotifier<AppUserState> with NavigatorCo
       await _authService.logout();
       if (willClearUser) {
         clearUser();
+        go(LoginView.path);
       }
 
       logInfo('User logged out');

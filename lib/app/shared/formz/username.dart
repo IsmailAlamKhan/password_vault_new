@@ -1,14 +1,13 @@
 import 'base_codegen.dart';
 
 class Username extends DefaultStringInput {
-  Username({required bool isRequired, required String value})
-      : super(isRequired: isRequired, value: value);
+  Username({required super.isRequired, required super.value});
 
   const Username.pure() : super.pure();
-  const Username.dirty([String value = '']) : super.dirty(value);
+  const Username.dirty([super.value]) : super.dirty();
 
   const Username.pureNonRequired() : super.pureNonRequired();
-  const Username.dirtyNonRequired([String value = '']) : super.dirtyNonRequired(value);
+  const Username.dirtyNonRequired([super.value]) : super.dirtyNonRequired();
 
   @override
   Username copyWith([String? value]) =>

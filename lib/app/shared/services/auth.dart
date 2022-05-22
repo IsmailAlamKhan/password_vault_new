@@ -32,7 +32,7 @@ class SupabaseAuthServiceImpl extends AuthService {
   late final _supabase = Supabase.instance.client;
   late final _supabaseAuth = SupabaseAuth.instance;
 
-  SupabaseAuthServiceImpl(Ref ref) : super(ref);
+  SupabaseAuthServiceImpl(super.ref);
 
   @override
   Future<AppUser> login({required String email, required String password}) async {

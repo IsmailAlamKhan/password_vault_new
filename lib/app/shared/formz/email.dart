@@ -4,15 +4,15 @@ import 'base_codegen.dart';
 
 class Email extends DefaultStringInput {
   Email({
-    required bool isRequired,
-    required String value,
-  }) : super(isRequired: isRequired, value: value);
+    required super.isRequired,
+    required super.value,
+  });
 
   const Email.pure() : super.pure();
-  const Email.dirty([String value = '']) : super.dirty(value);
+  const Email.dirty([super.value]) : super.dirty();
 
   const Email.pureNonRequired() : super.pureNonRequired();
-  const Email.dirtyNonRequired([String value = '']) : super.dirtyNonRequired(value);
+  const Email.dirtyNonRequired([super.value]) : super.dirtyNonRequired();
 
   @override
   Email copyWith([String? value]) => Email(

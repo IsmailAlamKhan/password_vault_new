@@ -9,7 +9,7 @@ import 'shared/router/router.dart';
 import 'shared/theme/theme.dart';
 
 class PasswordVaultApp extends HookConsumerWidget {
-  const PasswordVaultApp({Key? key}) : super(key: key);
+  const PasswordVaultApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -56,14 +56,17 @@ class NavigatorListener extends HookConsumerWidget {
     final router = ref.watch(appRouterProvider);
     final eventBus = ref.watch(eventBusProvider);
     final scaffoldMessenger = ScaffoldMessenger.of(context);
-    final navigator = router.navigator;
 
     useEffect(() {
       final subscription = eventBus.on<NavigationEvent>((event) {
         event.when(
-          page: (page, extra) => router.go(page, extra: extra),
+          go: (page, extra) => router.go(page, extra: extra),
+          push: (page, extra) => router.push(page, extra: extra),
           pop: router.pop,
-          dialog: (builder) => showDialog(context: navigator!.context, builder: builder),
+          dialog: (builder) {
+            final navigator = router.navigator;
+            showDialog(context: navigator!.context, builder: builder);
+          },
           snackbar: (snackbar) {
             scaffoldMessenger
               ..hideCurrentSnackBar()

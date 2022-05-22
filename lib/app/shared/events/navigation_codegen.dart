@@ -7,7 +7,8 @@ part 'navigation_codegen.freezed.dart';
 
 @freezed
 class NavigationEvent with _$NavigationEvent, Event {
-  const factory NavigationEvent.page(String route, {Object? extra}) = NavigationEventPage;
+  const factory NavigationEvent.go(String route, {Object? extra}) = NavigationGoEvent;
+  const factory NavigationEvent.push(String route, {Object? extra}) = NavigationPushEvent;
 
   const factory NavigationEvent.pop() = NavigationEventPop;
 

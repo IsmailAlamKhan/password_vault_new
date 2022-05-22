@@ -16,13 +16,15 @@ final _privateConstructorUsedError = UnsupportedError(
 
 GetPasswordDataRpcBuilder _$GetPasswordDataRpcBuilderFromJson(
     Map<String, dynamic> json) {
-  return _GetPasswordDataRpcBuilder.fromJson(json);
+  return _GetPasswordDataRpcBuilderById.fromJson(json);
 }
 
 /// @nodoc
 mixin _$GetPasswordDataRpcBuilder {
+  @JsonKey(name: 'id_input')
+  int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'uid_input')
-  String get uid => throw _privateConstructorUsedError;
+  String? get uid => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +37,9 @@ abstract class $GetPasswordDataRpcBuilderCopyWith<$Res> {
   factory $GetPasswordDataRpcBuilderCopyWith(GetPasswordDataRpcBuilder value,
           $Res Function(GetPasswordDataRpcBuilder) then) =
       _$GetPasswordDataRpcBuilderCopyWithImpl<$Res>;
-  $Res call({@JsonKey(name: 'uid_input') String uid});
+  $Res call(
+      {@JsonKey(name: 'id_input') int? id,
+      @JsonKey(name: 'uid_input') String? uid});
 }
 
 /// @nodoc
@@ -49,113 +53,138 @@ class _$GetPasswordDataRpcBuilderCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? uid = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       uid: uid == freezed
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
 
 /// @nodoc
-abstract class _$$_GetPasswordDataRpcBuilderCopyWith<$Res>
+abstract class _$$_GetPasswordDataRpcBuilderByIdCopyWith<$Res>
     implements $GetPasswordDataRpcBuilderCopyWith<$Res> {
-  factory _$$_GetPasswordDataRpcBuilderCopyWith(
-          _$_GetPasswordDataRpcBuilder value,
-          $Res Function(_$_GetPasswordDataRpcBuilder) then) =
-      __$$_GetPasswordDataRpcBuilderCopyWithImpl<$Res>;
+  factory _$$_GetPasswordDataRpcBuilderByIdCopyWith(
+          _$_GetPasswordDataRpcBuilderById value,
+          $Res Function(_$_GetPasswordDataRpcBuilderById) then) =
+      __$$_GetPasswordDataRpcBuilderByIdCopyWithImpl<$Res>;
   @override
-  $Res call({@JsonKey(name: 'uid_input') String uid});
+  $Res call(
+      {@JsonKey(name: 'id_input') int? id,
+      @JsonKey(name: 'uid_input') String? uid});
 }
 
 /// @nodoc
-class __$$_GetPasswordDataRpcBuilderCopyWithImpl<$Res>
+class __$$_GetPasswordDataRpcBuilderByIdCopyWithImpl<$Res>
     extends _$GetPasswordDataRpcBuilderCopyWithImpl<$Res>
-    implements _$$_GetPasswordDataRpcBuilderCopyWith<$Res> {
-  __$$_GetPasswordDataRpcBuilderCopyWithImpl(
-      _$_GetPasswordDataRpcBuilder _value,
-      $Res Function(_$_GetPasswordDataRpcBuilder) _then)
-      : super(_value, (v) => _then(v as _$_GetPasswordDataRpcBuilder));
+    implements _$$_GetPasswordDataRpcBuilderByIdCopyWith<$Res> {
+  __$$_GetPasswordDataRpcBuilderByIdCopyWithImpl(
+      _$_GetPasswordDataRpcBuilderById _value,
+      $Res Function(_$_GetPasswordDataRpcBuilderById) _then)
+      : super(_value, (v) => _then(v as _$_GetPasswordDataRpcBuilderById));
 
   @override
-  _$_GetPasswordDataRpcBuilder get _value =>
-      super._value as _$_GetPasswordDataRpcBuilder;
+  _$_GetPasswordDataRpcBuilderById get _value =>
+      super._value as _$_GetPasswordDataRpcBuilderById;
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? uid = freezed,
   }) {
-    return _then(_$_GetPasswordDataRpcBuilder(
+    return _then(_$_GetPasswordDataRpcBuilderById(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       uid: uid == freezed
           ? _value.uid
           : uid // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_GetPasswordDataRpcBuilder extends _GetPasswordDataRpcBuilder {
-  const _$_GetPasswordDataRpcBuilder(
-      {@JsonKey(name: 'uid_input') required this.uid})
+class _$_GetPasswordDataRpcBuilderById extends _GetPasswordDataRpcBuilderById {
+  const _$_GetPasswordDataRpcBuilderById(
+      {@JsonKey(name: 'id_input') this.id,
+      @JsonKey(name: 'uid_input') this.uid})
       : super._();
 
-  factory _$_GetPasswordDataRpcBuilder.fromJson(Map<String, dynamic> json) =>
-      _$$_GetPasswordDataRpcBuilderFromJson(json);
+  factory _$_GetPasswordDataRpcBuilderById.fromJson(
+          Map<String, dynamic> json) =>
+      _$$_GetPasswordDataRpcBuilderByIdFromJson(json);
 
   @override
+  @JsonKey(name: 'id_input')
+  final int? id;
+  @override
   @JsonKey(name: 'uid_input')
-  final String uid;
+  final String? uid;
 
   @override
   String toString() {
-    return 'GetPasswordDataRpcBuilder(uid: $uid)';
+    return 'GetPasswordDataRpcBuilder(id: $id, uid: $uid)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GetPasswordDataRpcBuilder &&
+            other is _$_GetPasswordDataRpcBuilderById &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.uid, uid));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(uid));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(uid));
 
   @JsonKey(ignore: true)
   @override
-  _$$_GetPasswordDataRpcBuilderCopyWith<_$_GetPasswordDataRpcBuilder>
-      get copyWith => __$$_GetPasswordDataRpcBuilderCopyWithImpl<
-          _$_GetPasswordDataRpcBuilder>(this, _$identity);
+  _$$_GetPasswordDataRpcBuilderByIdCopyWith<_$_GetPasswordDataRpcBuilderById>
+      get copyWith => __$$_GetPasswordDataRpcBuilderByIdCopyWithImpl<
+          _$_GetPasswordDataRpcBuilderById>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GetPasswordDataRpcBuilderToJson(this);
+    return _$$_GetPasswordDataRpcBuilderByIdToJson(this);
   }
 }
 
-abstract class _GetPasswordDataRpcBuilder extends GetPasswordDataRpcBuilder {
-  const factory _GetPasswordDataRpcBuilder(
-          {@JsonKey(name: 'uid_input') required final String uid}) =
-      _$_GetPasswordDataRpcBuilder;
-  const _GetPasswordDataRpcBuilder._() : super._();
+abstract class _GetPasswordDataRpcBuilderById
+    extends GetPasswordDataRpcBuilder {
+  const factory _GetPasswordDataRpcBuilderById(
+          {@JsonKey(name: 'id_input') final int? id,
+          @JsonKey(name: 'uid_input') final String? uid}) =
+      _$_GetPasswordDataRpcBuilderById;
+  const _GetPasswordDataRpcBuilderById._() : super._();
 
-  factory _GetPasswordDataRpcBuilder.fromJson(Map<String, dynamic> json) =
-      _$_GetPasswordDataRpcBuilder.fromJson;
+  factory _GetPasswordDataRpcBuilderById.fromJson(Map<String, dynamic> json) =
+      _$_GetPasswordDataRpcBuilderById.fromJson;
 
+  @override
+  @JsonKey(name: 'id_input')
+  int? get id => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'uid_input')
-  String get uid => throw _privateConstructorUsedError;
+  String? get uid => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$_GetPasswordDataRpcBuilderCopyWith<_$_GetPasswordDataRpcBuilder>
+  _$$_GetPasswordDataRpcBuilderByIdCopyWith<_$_GetPasswordDataRpcBuilderById>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -304,5 +333,284 @@ abstract class _GetPasswordProviderRpcBuilder
   @override
   @JsonKey(ignore: true)
   _$$_GetPasswordProviderRpcBuilderCopyWith<_$_GetPasswordProviderRpcBuilder>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$AddUpdatePasswordRpcBuilder {
+  PasswordFormState get state => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $AddUpdatePasswordRpcBuilderCopyWith<AddUpdatePasswordRpcBuilder>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AddUpdatePasswordRpcBuilderCopyWith<$Res> {
+  factory $AddUpdatePasswordRpcBuilderCopyWith(
+          AddUpdatePasswordRpcBuilder value,
+          $Res Function(AddUpdatePasswordRpcBuilder) then) =
+      _$AddUpdatePasswordRpcBuilderCopyWithImpl<$Res>;
+  $Res call({PasswordFormState state});
+
+  $PasswordFormStateCopyWith<$Res> get state;
+}
+
+/// @nodoc
+class _$AddUpdatePasswordRpcBuilderCopyWithImpl<$Res>
+    implements $AddUpdatePasswordRpcBuilderCopyWith<$Res> {
+  _$AddUpdatePasswordRpcBuilderCopyWithImpl(this._value, this._then);
+
+  final AddUpdatePasswordRpcBuilder _value;
+  // ignore: unused_field
+  final $Res Function(AddUpdatePasswordRpcBuilder) _then;
+
+  @override
+  $Res call({
+    Object? state = freezed,
+  }) {
+    return _then(_value.copyWith(
+      state: state == freezed
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as PasswordFormState,
+    ));
+  }
+
+  @override
+  $PasswordFormStateCopyWith<$Res> get state {
+    return $PasswordFormStateCopyWith<$Res>(_value.state, (value) {
+      return _then(_value.copyWith(state: value));
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$_AddUpdatePasswordRpcBuilderCopyWith<$Res>
+    implements $AddUpdatePasswordRpcBuilderCopyWith<$Res> {
+  factory _$$_AddUpdatePasswordRpcBuilderCopyWith(
+          _$_AddUpdatePasswordRpcBuilder value,
+          $Res Function(_$_AddUpdatePasswordRpcBuilder) then) =
+      __$$_AddUpdatePasswordRpcBuilderCopyWithImpl<$Res>;
+  @override
+  $Res call({PasswordFormState state});
+
+  @override
+  $PasswordFormStateCopyWith<$Res> get state;
+}
+
+/// @nodoc
+class __$$_AddUpdatePasswordRpcBuilderCopyWithImpl<$Res>
+    extends _$AddUpdatePasswordRpcBuilderCopyWithImpl<$Res>
+    implements _$$_AddUpdatePasswordRpcBuilderCopyWith<$Res> {
+  __$$_AddUpdatePasswordRpcBuilderCopyWithImpl(
+      _$_AddUpdatePasswordRpcBuilder _value,
+      $Res Function(_$_AddUpdatePasswordRpcBuilder) _then)
+      : super(_value, (v) => _then(v as _$_AddUpdatePasswordRpcBuilder));
+
+  @override
+  _$_AddUpdatePasswordRpcBuilder get _value =>
+      super._value as _$_AddUpdatePasswordRpcBuilder;
+
+  @override
+  $Res call({
+    Object? state = freezed,
+  }) {
+    return _then(_$_AddUpdatePasswordRpcBuilder(
+      state: state == freezed
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as PasswordFormState,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_AddUpdatePasswordRpcBuilder extends _AddUpdatePasswordRpcBuilder {
+  _$_AddUpdatePasswordRpcBuilder({required this.state}) : super._();
+
+  @override
+  final PasswordFormState state;
+
+  @override
+  String toString() {
+    return 'AddUpdatePasswordRpcBuilder(state: $state)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AddUpdatePasswordRpcBuilder &&
+            const DeepCollectionEquality().equals(other.state, state));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(state));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_AddUpdatePasswordRpcBuilderCopyWith<_$_AddUpdatePasswordRpcBuilder>
+      get copyWith => __$$_AddUpdatePasswordRpcBuilderCopyWithImpl<
+          _$_AddUpdatePasswordRpcBuilder>(this, _$identity);
+}
+
+abstract class _AddUpdatePasswordRpcBuilder
+    extends AddUpdatePasswordRpcBuilder {
+  factory _AddUpdatePasswordRpcBuilder(
+          {required final PasswordFormState state}) =
+      _$_AddUpdatePasswordRpcBuilder;
+  _AddUpdatePasswordRpcBuilder._() : super._();
+
+  @override
+  PasswordFormState get state => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$_AddUpdatePasswordRpcBuilderCopyWith<_$_AddUpdatePasswordRpcBuilder>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+DeletePasswordRpcBuilder _$DeletePasswordRpcBuilderFromJson(
+    Map<String, dynamic> json) {
+  return _DeletePasswordRpcBuilder.fromJson(json);
+}
+
+/// @nodoc
+mixin _$DeletePasswordRpcBuilder {
+  @JsonKey(name: 'id_input')
+  int get id => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $DeletePasswordRpcBuilderCopyWith<DeletePasswordRpcBuilder> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $DeletePasswordRpcBuilderCopyWith<$Res> {
+  factory $DeletePasswordRpcBuilderCopyWith(DeletePasswordRpcBuilder value,
+          $Res Function(DeletePasswordRpcBuilder) then) =
+      _$DeletePasswordRpcBuilderCopyWithImpl<$Res>;
+  $Res call({@JsonKey(name: 'id_input') int id});
+}
+
+/// @nodoc
+class _$DeletePasswordRpcBuilderCopyWithImpl<$Res>
+    implements $DeletePasswordRpcBuilderCopyWith<$Res> {
+  _$DeletePasswordRpcBuilderCopyWithImpl(this._value, this._then);
+
+  final DeletePasswordRpcBuilder _value;
+  // ignore: unused_field
+  final $Res Function(DeletePasswordRpcBuilder) _then;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$$_DeletePasswordRpcBuilderCopyWith<$Res>
+    implements $DeletePasswordRpcBuilderCopyWith<$Res> {
+  factory _$$_DeletePasswordRpcBuilderCopyWith(
+          _$_DeletePasswordRpcBuilder value,
+          $Res Function(_$_DeletePasswordRpcBuilder) then) =
+      __$$_DeletePasswordRpcBuilderCopyWithImpl<$Res>;
+  @override
+  $Res call({@JsonKey(name: 'id_input') int id});
+}
+
+/// @nodoc
+class __$$_DeletePasswordRpcBuilderCopyWithImpl<$Res>
+    extends _$DeletePasswordRpcBuilderCopyWithImpl<$Res>
+    implements _$$_DeletePasswordRpcBuilderCopyWith<$Res> {
+  __$$_DeletePasswordRpcBuilderCopyWithImpl(_$_DeletePasswordRpcBuilder _value,
+      $Res Function(_$_DeletePasswordRpcBuilder) _then)
+      : super(_value, (v) => _then(v as _$_DeletePasswordRpcBuilder));
+
+  @override
+  _$_DeletePasswordRpcBuilder get _value =>
+      super._value as _$_DeletePasswordRpcBuilder;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+  }) {
+    return _then(_$_DeletePasswordRpcBuilder(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_DeletePasswordRpcBuilder extends _DeletePasswordRpcBuilder {
+  _$_DeletePasswordRpcBuilder({@JsonKey(name: 'id_input') required this.id})
+      : super._();
+
+  factory _$_DeletePasswordRpcBuilder.fromJson(Map<String, dynamic> json) =>
+      _$$_DeletePasswordRpcBuilderFromJson(json);
+
+  @override
+  @JsonKey(name: 'id_input')
+  final int id;
+
+  @override
+  String toString() {
+    return 'DeletePasswordRpcBuilder(id: $id)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DeletePasswordRpcBuilder &&
+            const DeepCollectionEquality().equals(other.id, id));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(id));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_DeletePasswordRpcBuilderCopyWith<_$_DeletePasswordRpcBuilder>
+      get copyWith => __$$_DeletePasswordRpcBuilderCopyWithImpl<
+          _$_DeletePasswordRpcBuilder>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_DeletePasswordRpcBuilderToJson(this);
+  }
+}
+
+abstract class _DeletePasswordRpcBuilder extends DeletePasswordRpcBuilder {
+  factory _DeletePasswordRpcBuilder(
+          {@JsonKey(name: 'id_input') required final int id}) =
+      _$_DeletePasswordRpcBuilder;
+  _DeletePasswordRpcBuilder._() : super._();
+
+  factory _DeletePasswordRpcBuilder.fromJson(Map<String, dynamic> json) =
+      _$_DeletePasswordRpcBuilder.fromJson;
+
+  @override
+  @JsonKey(name: 'id_input')
+  int get id => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$$_DeletePasswordRpcBuilderCopyWith<_$_DeletePasswordRpcBuilder>
       get copyWith => throw _privateConstructorUsedError;
 }

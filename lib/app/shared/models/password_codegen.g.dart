@@ -14,6 +14,7 @@ _$_PasswordData _$$_PasswordDataFromJson(Map<String, dynamic> json) =>
       createdAt: DateTime.parse(json['created_at'] as String),
       provider:
           PasswordProvider.fromJson(json['provider'] as Map<String, dynamic>),
+      userId: json['user_id'] as String,
     );
 
 Map<String, dynamic> _$$_PasswordDataToJson(_$_PasswordData instance) =>
@@ -23,6 +24,7 @@ Map<String, dynamic> _$$_PasswordDataToJson(_$_PasswordData instance) =>
       'username': instance.username,
       'created_at': instance.createdAt.toIso8601String(),
       'provider': instance.provider,
+      'user_id': instance.userId,
     };
 
 _$_PasswordProvider _$$_PasswordProviderFromJson(Map<String, dynamic> json) =>

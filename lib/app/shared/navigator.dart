@@ -7,7 +7,11 @@ mixin NavigatorController {
   EventBus get eventBus;
 
   void push(String route, {Object? extra}) {
-    eventBus.emit(NavigationEvent.page(route, extra: extra));
+    eventBus.emit(NavigationEvent.push(route, extra: extra));
+  }
+
+  void go(String route, {Object? extra}) {
+    eventBus.emit(NavigationEvent.go(route, extra: extra));
   }
 
   void pop() => eventBus.emit(const NavigationEvent.pop());

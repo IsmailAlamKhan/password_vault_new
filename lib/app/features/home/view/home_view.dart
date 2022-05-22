@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -7,18 +8,19 @@ import '../../../shared/controllers/current_user.dart';
 import '../../../shared/event_bus.dart';
 import '../../../shared/events/events.dart';
 import '../../login/view/login_view.dart';
-import 'passwords.dart';
+import '../../password_form/view/password_form_view.dart';
+import '../../passwords/passwords.dart';
 
-class HomeView extends ConsumerWidget {
-  const HomeView({Key? key}) : super(key: key);
+class HomeView extends HookConsumerWidget {
+  const HomeView({super.key});
   static const path = '/';
 
   static GoRoute route(Ref ref) {
-    final currentUserState = ref.read(currentUserControllerProvider);
     return GoRoute(
       path: path,
       builder: (context, state) => const HomeView(),
       redirect: (state) {
+        final currentUserState = ref.read(currentUserControllerProvider);
         final isLoggedIn = currentUserState.whenOrNull(authenticated: (_) => true) ?? false;
         if (!isLoggedIn) {
           return LoginView.path;
@@ -30,6 +32,15 @@ class HomeView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(currentUserProvider);
+    final selectedPassword = useState<int?>(null);
+    useEffect(() {
+      final subscription = ref.watch(eventBusProvider).on<PasswordDeleteEvent>((event) {
+        if (event.id == selectedPassword.value) {
+          selectedPassword.value = null;
+        }
+      });
+      return subscription.cancel;
+    }, []);
     return Scaffold(
       appBar: AppBar(
         title: Text('Welcome ${user?.username}'),
@@ -43,15 +54,20 @@ class HomeView extends ConsumerWidget {
       body: LayoutBuilder(builder: (context, constraints) {
         final isSmallScreen = Breakpoints.isSmallScreen(constraints);
         if (isSmallScreen) {
-          return const PasswordList();
+          return const PasswordView(isFullScreen: true);
         } else {
           return Row(
             children: [
               ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 300),
-                child: const PasswordList(),
+                child: PasswordView(onPasswordSelected: (id) => selectedPassword.value = id),
               ),
-              const Expanded(child: Placeholder()),
+              if (selectedPassword.value != null)
+                Expanded(
+                  child: PasswordForm(
+                    initialId: selectedPassword.value == 0 ? null : selectedPassword.value,
+                  ),
+                ),
             ],
           );
         }

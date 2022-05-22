@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -22,17 +23,22 @@ abstract class DbService {
   /// call a stored procedure
   Future<Response<T>> rpc<T>(
     SupabaseRpcBuilder rpcBuilder, {
-    T Function(List<dynamic> data)? mapData,
+    T Function(dynamic data)? mapData,
+  });
+  Stream<Response<T>> rpcStream<T>(
+    SupabaseRpcBuilder rpcBuilder,
+    String listenKey, {
+    T Function(dynamic data)? mapData,
   });
 }
 
 class SupabaseDbServiceImpl extends DbService {
-  SupabaseDbServiceImpl(Ref ref) : super(ref);
+  SupabaseDbServiceImpl(super.ref);
   late final _supabase = Supabase.instance.client;
 
   @override
   Future<void> init() => Supabase.initialize(
-        localStorage: const _HiveLocalStorage(),
+        localStorage: const EmptyLocalStorage(),
         anonKey: config.anonKey,
         url: config.url,
         debug: kDebugMode,
@@ -42,14 +48,45 @@ class SupabaseDbServiceImpl extends DbService {
   @override
   Future<Response<T>> rpc<T>(
     SupabaseRpcBuilder rpcBuilder, {
-    T Function(List<dynamic> data)? mapData,
+    T Function(dynamic data)? mapData,
   }) =>
-      _supabase.rpc(rpcBuilder.name, params: rpcBuilder.toJson()).execute().then((value) {
-        if (value.error != null) {
-          throw AppException(value.error!.message);
-        }
+      _supabase
+          .rpc(
+            rpcBuilder.name,
+            params: rpcBuilder.toJson(),
+          )
+          .execute()
+          .then((value) {
         return value.toResponse<T>(mapData);
       });
+
+  @override
+  Stream<Response<T>> rpcStream<T>(
+    SupabaseRpcBuilder rpcBuilder,
+    String listenKey, {
+    T Function(dynamic data)? mapData,
+  }) {
+    final streamController = StreamController<Response<T>>.broadcast();
+    void _addData(Response<T> response) {
+      if (response.error != null) {
+        streamController.addError(AppException(response.error!.message), StackTrace.current);
+      } else {
+        streamController.add(response);
+      }
+    }
+
+    rpc(rpcBuilder, mapData: mapData).then(
+      (value) {
+        _addData(value);
+        _supabase.from(listenKey).stream(['id']).execute().listen(
+              (event) {
+                rpc(rpcBuilder, mapData: mapData).then(_addData);
+              },
+            );
+      },
+    );
+    return streamController.stream;
+  }
 }
 
 const _hiveBoxName = 'supabase_authentication';
